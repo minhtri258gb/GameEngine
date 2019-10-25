@@ -34,8 +34,6 @@ extern Space *g_pSpace;
 #include "../object/models/StaticModel.h"
 #include "../object/models/AnimModel.h"
 
-#include "../../game/object/space/InteractiveEntity.h"
-#include "../../game/object/space/ArchitectureEntity.h"
 #include "../../game/object/entity/CommonEntity.h"
 #include "../../game/object/entity/EquipmentEntity.h"
 #include "../../game/object/entity/StaticEntity.h"
@@ -113,93 +111,92 @@ void Loader::map()
 
 void Loader::entity()
 {
-	typedef struct
-	{
-		bool anim;
-		int modelId;
-		vec3 origin;
-		int angle;
-		float scale;
-	} t_rawent;
+	// typedef struct
+	// {
+	// 	bool anim;
+	// 	int modelId;
+	// 	vec3 origin;
+	// 	int angle;
+	// 	float scale;
+	// } t_rawent;
 
-	// Variable
-	vector<t_rawent> listEnt;
-	vector<string> listMdlName;
+	// // Variable
+	// vector<t_rawent> listEnt;
+	// vector<string> listMdlName;
 
-	LSTFile fLST("res/maps/" + g_pSpace->getMapName() + "/entities.txt");
-	while(fLST.next())
-	{
-		// Entity data
-		t_rawent ent;
+	// LSTFile fLST("res/maps/" + g_pSpace->getMapName() + "/entities.txt");
+	// while(fLST.next())
+	// {
+	// 	// Entity data
+	// 	t_rawent ent;
 
-		string modelname = fLST.getString();
-		ent.modelId = -1;
-		ent.origin = fLST.getVec3();
-		ent.angle = fLST.getInt();
-		ent.scale = fLST.getFloat();
+	// 	string modelname = fLST.getString();
+	// 	ent.modelId = -1;
+	// 	ent.origin = fLST.getVec3();
+	// 	ent.angle = fLST.getInt();
+	// 	ent.scale = fLST.getFloat();
 
-		for(unsigned int i=0; i< listMdlName.size(); i++)
-			if(listMdlName.at(i) == modelname)
-				ent.modelId = i;
+	// 	for(unsigned int i=0; i< listMdlName.size(); i++)
+	// 		if(listMdlName.at(i) == modelname)
+	// 			ent.modelId = i;
 		
-		if(ent.modelId == -1)
-		{
-			ent.modelId = listMdlName.size();
-			listMdlName.push_back(modelname);
-		}
+	// 	if(ent.modelId == -1)
+	// 	{
+	// 		ent.modelId = listMdlName.size();
+	// 		listMdlName.push_back(modelname);
+	// 	}
 
-		listEnt.push_back(ent);
-	}
+	// 	listEnt.push_back(ent);
+	// }
 
-	// Model loader
-	vector<MTMDFile*> listMdlFile;
-	vector<bool> l_animMdl;
-	for(unsigned int i = 0; i < listMdlName.size(); i++)
-	{
-		string modelname = listMdlName.at(i);
-		string filedir = "res/models/"+modelname+"/";
-		CFGFile fCFG(filedir+"info.cfg");
+	// // Model loader
+	// vector<MTMDFile*> listMdlFile;
+	// vector<bool> l_animMdl;
+	// for(unsigned int i = 0; i < listMdlName.size(); i++)
+	// {
+	// 	string modelname = listMdlName.at(i);
+	// 	string filedir = "res/models/"+modelname+"/";
+	// 	// CFGFile fCFG(filedir+"info.cfg");
 
-		fCFG.select("[general]");
-		string filepath = filedir+fCFG.get("model");
+	// 	string filepath = filedir+"model.mtmd";
 
-		MTMDFile *fMTMD = new MTMDFile();
-		if(!fMTMD->load(filepath))
-		{
-			g_pSystem->error("[Loader::entity] Can't load model " + modelname);
-			continue;
-		}
-		listMdlFile.push_back(fMTMD);
-		l_animMdl.push_back(fMTMD->m_frame_position.size() ? true : false);
-	}
+	// 	MTMDFile *fMTMD = new MTMDFile();
+	// 	if(!fMTMD->load(filepath))
+	// 	{
+	// 		g_pSystem->error("[Loader::entity] Can't load model " + modelname);
+	// 		continue;
+	// 	}
+	// 	listMdlFile.push_back(fMTMD);
+	// 	l_animMdl.push_back(fMTMD->m_frame_position.size() ? true : false);
+	// }
 
-	// Create Model
-	vector<StaticModel*> listModelS;
-	vector<AnimModel*> listModelA;
-	int indexS = 0, indexA = 0;
-	vector<int> l_pointerMdl;
-	for(MTMDFile *file : listMdlFile)
-	{
-		if(file->m_frame_position.size())
-		{
-			l_pointerMdl.push_back(indexA);
-			indexA++;
-			listModelA.push_back(new AnimModel(file));
-		}
-		else
-		{
-			l_pointerMdl.push_back(indexS);
-			indexS++;
-			listModelS.push_back(new StaticModel(file));
-		}
-	}
+	// // Create Model
+	// vector<StaticModel*> listModelS;
+	// vector<AnimModel*> listModelA;
+	// int indexS = 0, indexA = 0;
+	// vector<int> l_pointerMdl;
+	// for(MTMDFile *file : listMdlFile)
+	// {
+	// 	if(file->m_frame_position.size())
+	// 	{
+	// 		l_pointerMdl.push_back(indexA);
+	// 		indexA++;
+	// 		listModelA.push_back(new AnimModel(file));
+	// 	}
+	// 	else
+	// 	{
+	// 		l_pointerMdl.push_back(indexS);
+	// 		indexS++;
+	// 		listModelS.push_back(new StaticModel(file));
+	// 	}
+	// }
 	
-	// Create Entity
-	for(t_rawent ent : listEnt)
-		if(l_animMdl.at(ent.modelId))
-			g_pSpace->add(new EquipmentEntity(listModelA.at(l_pointerMdl.at(ent.modelId)), ent.origin, ent.angle, ent.scale));
-		else
-			g_pSpace->add(new CommonEntity(listModelS.at(l_pointerMdl.at(ent.modelId)), ent.origin, ent.angle, ent.scale));
+	// // Create Entity
+	// for(t_rawent ent : listEnt)
+	// 	if(l_animMdl.at(ent.modelId))
+	// 		g_pSpace->add(new EquipmentEntity(listModelA.at(l_pointerMdl.at(ent.modelId)), ent.origin, ent.angle, ent.scale));
+	// 	else
+	// 		g_pSpace->add(new CommonEntity(listModelS.at(l_pointerMdl.at(ent.modelId)), ent.origin, ent.angle, ent.scale));
 }
 
 void Loader::stora()

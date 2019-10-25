@@ -7,14 +7,13 @@
 
 Manager::Manager()
 {
-	StaticModel::u_manager = &m_modelmanager;
-	AnimModel::u_manager = &m_modelmanager;
+	// StaticModel::u_manager = &m_modelmanager;
+	// AnimModel::u_manager = &m_modelmanager;
 }
 
 void Manager::init()
 {
-	m_modelmanager.init();
-	modelshader.init();
+	// m_modelmanager.init();
 }
 
 Manager::~Manager()

@@ -19,7 +19,7 @@ ModelManager::ModelManager()
 void ModelManager::init()
 {
 	// SHADER STATIC
-	m_idProgramS = g_pGraphic->loadShader("res/shader/staticmodelVertex.glsl", "res/shader/staticmodelFragment.glsl");
+	m_idProgramS = g_pGraphic->loadShader("res/shader/model_static_vertex.glsl", "res/shader/model_static_fragment.glsl");
 	g_pGraphic->use(m_idProgramS);
 
 	g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgramS, "ourTexture"), 0);
@@ -31,7 +31,7 @@ void ModelManager::init()
 	m_viewLocS = g_pGraphic->getLocation(m_idProgramS, "view");
 	
 	// SHADER ANIMATION
-	m_idProgramA = g_pGraphic->loadShader("res/shader/animmodelVertex.glsl", "res/shader/animmodelFragment.glsl");
+	m_idProgramA = g_pGraphic->loadShader("res/shader/model_anim_vertex.glsl", "res/shader/model_anim_fragment.glsl");
 	g_pGraphic->use(m_idProgramA);
 
 	g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgramA, "ourTexture"), 0);

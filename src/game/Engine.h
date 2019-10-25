@@ -12,8 +12,8 @@
 #include "../engine/math/Math.h"
 
 #include "object/Stora.h"
-#include "../OLD/object/font/Font.h"
-#include "manager/EquipmentManager.h"
+// #include "../OLD/object/font/Font.h"
+// #include "manager/EquipmentManager.h"
 #include "object/player/MainPlayer.h"
 #include "object/space/MyEntity.h"
 #include "object/DebugObject.h"
@@ -26,12 +26,12 @@ class Engine
 public:
 
 	// Variable
-	Stora *m_stora;
+	// Stora *m_stora;
 	MainPlayer *m_mainPlayer;
-	MyEntity *m_myEntity;
-	EquipmentManager *m_equipmentManager;
-	Font *m_font;
-	DebugObject *m_debugObject;
+	// MyEntity *m_myEntity;
+	// EquipmentManager *m_equipmentManager;
+	// Font *m_font;
+	// DebugObject *m_debugObject;
 
 	// General
 	int launch();

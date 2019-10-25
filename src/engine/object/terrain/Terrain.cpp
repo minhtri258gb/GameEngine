@@ -29,16 +29,16 @@ void Terrain::init(string name)
 	shader->init();
 
 	// Data
-	BTFile* fBT = new BTFile("res/terrain/" + name + "/heightmap.bt");
+	BTFile fBT("res/terrain/" + name + "/heightmap.bt");
 
-	float depth = fBT->getRows();
-	float width = fBT->getColumns();
+	float depth = fBT.getRows();
+	float width = fBT.getColumns();
 
 	// Find
-//	int maxsize = depth > width ? depth : width;
-//	short hsize = 1;
-//	while(maxsize > (1 << hsize))
-//		hsize++;
+	// int maxsize = depth > width ? depth : width;
+	// short hsize = 1;
+	// while(maxsize > (1 << hsize))
+	// 	hsize++;
 
 	m_maxwidth = depth;
 	m_maxlength = width;
@@ -46,15 +46,13 @@ void Terrain::init(string name)
     for(int z=0; z<depth; z++)
 		for(int x=0; x<width; x++)
 		{
-			float h = fBT->getData(depth - z - 1, x);
+			float h = fBT.getData(depth - z - 1, x);
 			heightmap.push_back(h);
 			heightmapPhysic.push_back(h - 128.0f);
 		}
 
 	// Import to world
 	g_pSystem->world.addTerrain(width, depth, &heightmapPhysic[0], CELLSPACE);
-
-	delete fBT;
 
 	// Vertex buffer
 	m_vb.init(2);
@@ -64,16 +62,16 @@ void Terrain::init(string name)
 	m_vb.storaAttribute(1, 2, 9);
 	m_vb.unbind();
 
-	// Texture
-	m_texture.loadAdd("res/terrain/" + name + "/texture.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texDetailR.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texDetailG.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texDetailB.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texDetailA.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texPartR.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texPartG.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texPartB.tga");
-	m_texture.loadAdd("res/terrain/" + name + "/texPartA.tga");
+// 	// Texture
+	m_texture.loadAdd("res/terrain/" + name + "/bgTexture.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texDetailR.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texDetailG.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texDetailB.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texDetailA.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texPartR.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texPartG.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texPartB.tga");
+// 	m_texture.loadAdd("res/terrain/" + name + "/texPartA.tga");
 }
 
 Terrain::~Terrain()

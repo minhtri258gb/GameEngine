@@ -30,6 +30,7 @@ MainPlayer::MainPlayer()
 
     vecFront = vec3(0.0f, 0.0f, -1.0f);
     vecRight = vec3(1.0f, 0.0f, 0.0f);
+	velocity = vec3();
     angle = 0.0f;
     sprint = false;
 }
@@ -50,6 +51,7 @@ void MainPlayer::init()
 void MainPlayer::update()
 {
 	origin = body->getOrigin();
+
 	g_pView->setPosition(vec3(origin.x, origin.y + 40.0f, origin.z)); // 24 + 40 = 64 / 68
 
 	vecFront = g_pView->getVeclook();
@@ -63,14 +65,14 @@ void MainPlayer::update()
 	else
 		velocity *= 0.8f;
 
-	#if DEBUG
-//	body->setVelocity(velocity * engine.timer->getTimePassed());
+// 	#if DEBUG
+// //	body->setVelocity(velocity * engine.timer->getTimePassed());
+// 	body->setWalkDirection(velocity * g_pTimer->getTimePassed());
+// 	#else
 	body->setWalkDirection(velocity * g_pTimer->getTimePassed());
-	#else
-	body->setWalkDirection(velocity * engine.kernel.timer.getTimePassed());
-	#endif // DEBUG
+// 	#endif // DEBUG
 
-//	sprint = false;
+// 	sprint = false;
 }
 
 void MainPlayer::move(int direct)

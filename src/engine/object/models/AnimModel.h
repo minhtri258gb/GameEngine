@@ -16,7 +16,7 @@ public:
 	// Variable
 	static ModelManager *u_manager;
 
-	// Constructor
+	// Constructor / Destructor
 	AnimModel(MTMDFile*);
 	~AnimModel();
 

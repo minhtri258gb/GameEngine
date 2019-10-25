@@ -24,12 +24,12 @@ Engine::Engine()
 {
 	m_loader = new Loader();
 
-	m_stora = new Stora();
-	m_font = new Font();
-	m_equipmentManager = new EquipmentManager();
+	// m_stora = new Stora();
+	// m_font = new Font();
+	// m_equipmentManager = new EquipmentManager();
 	m_mainPlayer = new MainPlayer();
-	m_myEntity = new MyEntity();
-	m_debugObject = new DebugObject();
+	// m_myEntity = new MyEntity();
+	// m_debugObject = new DebugObject();
 
 	// General global pointer
 	g_pGraphic = &m_graphic;
@@ -45,17 +45,17 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-	delete m_debugObject;
+	// delete m_debugObject;
 	delete m_mainPlayer;
-	delete m_equipmentManager;
-	delete m_font;
-	delete m_stora;
+	// delete m_equipmentManager;
+	// delete m_font;
+	// delete m_stora;
 
 	delete m_loader;
 	
-	delete Sprite::manager->texture;
-	Emitter::cleanUp();
-	Sprite::cleanUp();
+	// delete Sprite::manager->texture;
+	// Emitter::cleanUp();
+	// Sprite::cleanUp();
 
 	g_pGraphic = NULL;
 	g_pSystem = NULL;
@@ -91,30 +91,30 @@ void Engine::init()
 	m_space.init();
 
 	// Other Object Init
-	Sprite::init();
-	Emitter::init();
-	SpriteTexture *texture = new SpriteTexture();
-	Emitter::manager->texture = texture;
-	Sprite::manager->texture = texture;
-	m_font->init();
-	m_font->changeText(0, "", vec2(0.005f, 0.97f), 0.5f, vec3(0.3f, 0.7f, 0.9f));
-	m_font->changeText(1, "This is sample text", vec2(0.02f, 0.035f), 1.0f, vec3(0.5f, 0.8f, 0.2f));
+	// Sprite::init();
+	// Emitter::init();
+	// SpriteTexture *texture = new SpriteTexture();
+	// Emitter::manager->texture = texture;
+	// Sprite::manager->texture = texture;
+	// m_font->init();
+	// m_font->changeText(0, "", vec2(0.005f, 0.97f), 0.5f, vec3(0.3f, 0.7f, 0.9f));
+	// m_font->changeText(1, "This is sample text", vec2(0.02f, 0.035f), 1.0f, vec3(0.5f, 0.8f, 0.2f));
 	
 	m_loader->map();
 
 	m_mainPlayer->init();
-	m_myEntity->init();
-	m_debugObject->init(COORDINATE_SYSTEM); // COORDINATE_SYSTEM
+	// m_myEntity->init();
+	// m_debugObject->init(COORDINATE_SYSTEM); // COORDINATE_SYSTEM
 
 	// Load again
 	m_loader->entity();
-	m_loader->stora();
+	// m_loader->stora();
 
 	// Build objects
 
 	// Add objects into world and stora
-	m_stora->init();
-	m_space.add(m_myEntity);
+	// m_stora->init();
+	// m_space.add(m_myEntity);
 }
 
 void Engine::framework()
@@ -126,19 +126,19 @@ void Engine::framework()
 	m_mainPlayer->update();
 	m_view.update(); // after mainPlayer
 	m_space.update();
-	m_myEntity->update();
-	m_system.audio.update();
-	m_debugObject->update();
+	// m_myEntity->update();
+	// m_system.audio.update();
+	// m_debugObject->update();
 
 	// Render
 	m_graphic.render();
-	m_myEntity->render();
+	// m_myEntity->render();
 	m_space.render();
 
-	m_font->setText(0, "FPS: %.2f", m_timer.getFPS());
-	m_font->render();
+	// m_font->setText(0, "FPS: %.2f", m_timer.getFPS());
+	// m_font->render();
 
-	m_debugObject->render();
+	// m_debugObject->render();
 
 	// sync
 	m_graphic.sync();

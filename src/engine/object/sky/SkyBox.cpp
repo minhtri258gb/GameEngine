@@ -92,12 +92,12 @@ void SkyBox::init(string name)
 	fogColour *= (1.0f / 255.0f);
 
 	// Shader
-	m_idProgram = g_pGraphic->loadShader("res/shader/skyboxVertex.glsl", "res/shader/skyboxFragment.glsl");
+	m_idProgram = g_pGraphic->loadShader("res/shader/skybox_vertex.glsl", "res/shader/skybox_fragment.glsl");
 	g_pGraphic->use(m_idProgram);
 
 	g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgram, "ourTexture"), 0);
 	g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgram, "projection"), g_pGraphic->getProjectionMat());
-	g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgram, "fogColour"), getFogColour());
+	// g_pGraphic->setUniform(g_pGraphic->getLocation(m_idProgram, "fogColour"), getFogColour());
 
 	m_viewLoc = g_pGraphic->getLocation(m_idProgram, "view");
 }

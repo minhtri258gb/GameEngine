@@ -38,7 +38,7 @@ void Command::update()
 		{
 			if(!m_keyLoop.test(idkey))
 				m_keyAction.set(idkey, false);
-			(*m_listCMD[idkey])();
+			(*m_listCMD.at(idkey))();
 		}
 }
 
@@ -290,8 +290,8 @@ pFuncCMD Command::convertFunction(string command)
 		switch(command[1])
 		{
 		case 'a':
-			if(command == "+attack")				return NULL;
-			else if(command == "+attack2")			return NULL;
+			if(command == "+attack")				return cmd_void;
+			else if(command == "+attack2")			return cmd_void;
 			break;
 		case 'b':
 			if(command == "+back")					return cmd_back;
@@ -302,11 +302,11 @@ pFuncCMD Command::convertFunction(string command)
 		case 'm':
 			if(command == "+moveleft")				return cmd_moveleft;
 			else if(command == "+moveright")		return cmd_moveright;
-			else if(command == "+moveup")			return NULL;
-			else if(command == "+movedown")			return NULL;
+			else if(command == "+moveup")			return cmd_void;
+			else if(command == "+movedown")			return cmd_void;
 			break;
 		case 's':
-			if(command == "+showscores")			return NULL;
+			if(command == "+showscores")			return cmd_void;
 			else if(command == "+sprint")			return cmd_sprint;
 			break;
 		case 'u':
@@ -315,13 +315,13 @@ pFuncCMD Command::convertFunction(string command)
 		}
 		break;
 	case 'c':
-		if(command == "cancelselect")				return NULL;
-		else if(command == "chat")					return NULL;
-		else if(command == "commandmenu")			return NULL;
-		else if(command == "crouch")				return NULL;
+		if(command == "cancelselect")				return cmd_void;
+		else if(command == "chat")					return cmd_void;
+		else if(command == "commandmenu")			return cmd_void;
+		else if(command == "crouch")				return cmd_void;
 		break;
 	case 'd':
-		if(command == "drop")						return NULL;
+		if(command == "drop")						return cmd_void;
 		else if(command == "debugfrustumcull")		return cmd_debugfrustumculling;
 		else if(command == "debugnoclip")			return cmd_debugnoclip;
 		else if(command == "debugorigin")			return cmd_debugorigin;
@@ -329,29 +329,29 @@ pFuncCMD Command::convertFunction(string command)
 	case 'e':
 		if(command == "exit")						return cmd_exit;
 	case 'i':
-		if(command == "invnext")					return NULL;
-		else if(command == "invprev")				return NULL;
+		if(command == "invnext")					return cmd_void;
+		else if(command == "invprev")				return cmd_void;
 		break;
 	case 'j':
 		if(command == "jump")						return cmd_jump;
 		break;
 	case 'r':
-		if(command == "reload")						return NULL;
+		if(command == "reload")						return cmd_void;
 		break;
 	case 's':
-		if(command == "slot10")						return NULL;
-		else if(command == "slot1")					return NULL;
-		else if(command == "slot2")					return NULL;
-		else if(command == "slot3")					return NULL;
-		else if(command == "slot4")					return NULL;
-		else if(command == "slot5")					return NULL;
-		else if(command == "slot6")					return NULL;
-		else if(command == "slot7")					return NULL;
-		else if(command == "slot8")					return NULL;
-		else if(command == "slot9")					return NULL;
+		if(command == "slot10")						return cmd_void;
+		else if(command == "slot1")					return cmd_void;
+		else if(command == "slot2")					return cmd_void;
+		else if(command == "slot3")					return cmd_void;
+		else if(command == "slot4")					return cmd_void;
+		else if(command == "slot5")					return cmd_void;
+		else if(command == "slot6")					return cmd_void;
+		else if(command == "slot7")					return cmd_void;
+		else if(command == "slot8")					return cmd_void;
+		else if(command == "slot9")					return cmd_void;
 		break;
 	case 't':
-		if(command == "toggleconsole")				return NULL;
+		if(command == "toggleconsole")				return cmd_void;
 		else if(command == "test1")					return cmd_test1;
 		else if(command == "test2")					return cmd_test2;
 		break;
